@@ -1,8 +1,20 @@
+<template>
+  <ion-app>
+    <ion-page>
+      <ion-router-outlet />
+      <!--      <Account v-if="session" :session="session" />-->
+      <!--      <Login v-else />-->
+    </ion-page>
+  </ion-app>
+</template>
+
 <script setup lang="ts">
+import { IonApp, IonPage, IonRouterOutlet } from '@ionic/vue'
 import { onMounted, ref } from 'vue'
-import Account from './components/Account.vue'
-import Auth from './components/Auth.vue'
+
 import { supabase } from '@/lib/supabase'
+import Login from '@/views/Login.vue'
+import Account from '@/views/Account.vue'
 
 const session = ref()
 
@@ -17,9 +29,4 @@ onMounted(() => {
 })
 </script>
 
-<template>
-  <div class="container" style="padding: 50px 0 100px 0">
-    <Account v-if="session" :session="session" />
-    <Auth v-else />
-  </div>
-</template>
+<router-view :session="session" />

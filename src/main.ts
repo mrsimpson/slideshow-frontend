@@ -1,11 +1,18 @@
-import './assets/main.css'
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-const app = createApp(App)
+import { IonicVue } from '@ionic/vue'
+/* Core CSS required for Ionic components to work properly */
+import '@ionic/vue/css/ionic.bundle.css'
 
-app.use(router)
+/* Theme variables */
+import './theme/variables.css'
 
-app.mount('#app')
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
+defineCustomElements(window).then((r) => {})
+const app = createApp(App).use(IonicVue).use(router)
+
+router.isReady().then(() => {
+  app.mount('#app')
+})
