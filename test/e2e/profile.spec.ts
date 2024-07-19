@@ -6,11 +6,23 @@ test.use({ storageState: presenterCredentialsFile })
 
 test('After sign-in, the profile page should be visible', async ({ page }) => {
   const profilePage = new ProfilePage(page)
-
   await profilePage.goto()
-  await expect(profilePage.signOutButton).toBeEnabled()
+  await profilePage.isProfileLoaded()
 
   await expect(profilePage.email).toBeDisabled()
-  // await expect(profilePage.email).toContainText('presenter@local')
   await expect(profilePage.email).toHaveValue('presenter@local')
+  await expect(profilePage.signOutButton).toBeEnabled()
+})
+
+test('Should be able to update username ', async ({ page }) => {
+  const profilePage = new ProfilePage(page)
+  await profilePage.goto()
+  await profilePage.isProfileLoaded()
+
+  const newUsername = `presenter-${new Date().toISOString()}`
+  await profilePage.username.fill(newUsername)
+  await profilePage.updateButton.click()
+
+  await profilePage.page.reload()
+  await expect(profilePage.username).toHaveValue(newUsername)
 })

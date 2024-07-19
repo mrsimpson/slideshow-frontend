@@ -1,5 +1,5 @@
 import { BasePage } from './base-page.js'
-import { Locator, Page } from '@playwright/test'
+import { expect, Locator, Page } from '@playwright/test'
 
 export class ProfilePage extends BasePage {
   readonly email: Locator
@@ -19,5 +19,9 @@ export class ProfilePage extends BasePage {
 
   public async goto(): Promise<void> {
     await super.goto('/me')
+  }
+
+  public async isProfileLoaded(): Promise<void> {
+    await expect(this.signOutButton, 'Profile is loaded').toBeEnabled()
   }
 }
