@@ -57,7 +57,7 @@ const sortedEvents = computed(() => {
 
 <style scoped>
 .list-container {
-  height: 300px; /* Adjust as needed */
+  flex: 1;
   overflow-y: scroll;
 }
 

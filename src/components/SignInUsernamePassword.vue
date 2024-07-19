@@ -1,14 +1,27 @@
 <template>
-  <NCard title="Signin for registered users" :bordered="false">
-    <NForm inline ref="formRef" :model="formValue" :rules="rules" @submit="handleSignin">
+  <NCard :bordered="false" title="Signin for registered users">
+    <NForm ref="formRef" :model="formValue" :rules="rules" inline @submit="handleSignin">
       <NFormItem label="E-mail" path="email">
-        <NInput v-model:value="formValue.email" placeholder="your email" />
+        <NInput
+          v-model:value="formValue.email"
+          data-testid="input-signin-email"
+          placeholder="your email"
+        />
       </NFormItem>
       <NFormItem label="Password" path="password">
-        <NInput v-model:value="formValue.password" type="password" placeholder="your password" />
+        <NInput
+          v-model:value="formValue.password"
+          data-testid="input-signin-password"
+          placeholder="your password"
+          type="password"
+        />
       </NFormItem>
       <NFormItem>
-        <NButton @click="handleSignin" :loading="loading" :disabled="loading"
+        <NButton
+          :disabled="loading"
+          :loading="loading"
+          data-testid="button-signin-submit"
+          @click="handleSignin"
           >{{ loading ? 'Loading' : 'Submit' }}
         </NButton>
       </NFormItem>
@@ -16,11 +29,10 @@
   </NCard>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import { ref } from 'vue'
-import { NButton, NFormItem, NInput, NForm, NCard } from 'naive-ui'
-import { useMessage } from 'naive-ui'
 import type { FormInst } from 'naive-ui'
+import { NButton, NCard, NForm, NFormItem, NInput, useMessage } from 'naive-ui'
 import { supabase } from '@/lib/supabase'
 
 const loading = ref(false)

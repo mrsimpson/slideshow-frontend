@@ -3,12 +3,19 @@
     <n-form ref="formRef" :model="formValue" :rules="rules" @submit="updateProfile">
       <!-- <Avatar :path="formValue.avatar_url" @upload="updateProfile" />-->
       <n-form-item :label="t('email_label')">
-        <NInput id="email" :value="session?.user.email" disabled type="text" />
+        <NInput
+          id="email"
+          :value="session?.user.email"
+          data-testid="input-account-email"
+          disabled
+          type="text"
+        />
       </n-form-item>
       <n-form-item :label="t('username_label')" path="username">
         <n-input
           id="username"
           v-model:value="formValue.username"
+          data-testid="input-account-username"
           placeholder="Enter your username"
           type="text"
         />
@@ -17,18 +24,27 @@
         <n-input
           id="website"
           v-model:value="formValue.website"
+          data-testid="input-account-website"
           placeholder="Enter your website URL"
           type="text"
         />
       </n-form-item>
       <n-form-item>
-        <n-button :disabled="loading" @click.prevent="updateProfile">{{
+        <n-button
+          :disabled="loading"
+          data-testid="button-account-updateProfile"
+          @click.prevent="updateProfile"
+        >
+          {{
           t('update_button')
-        }}</n-button>
+        }}
+        </n-button>
       </n-form-item>
     </n-form>
     <n-form-item>
-      <n-button type="error" @click="signOut">{{ t('sign_out_button') }}</n-button>
+      <n-button data-testid="button-account-signOut" type="error" @click="signOut">{{
+        t('sign_out_button')
+      }}</n-button>
     </n-form-item>
   </n-card>
 </template>

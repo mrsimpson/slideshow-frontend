@@ -49,19 +49,19 @@ const osThemeRef = useOsTheme()
 const theme = ref((osThemeRef.value === 'dark' ? darkTheme : null) as GlobalTheme | null)
 
 const themeOverrides: GlobalThemeOverrides = {
-  Menu: {
-    color: '#00000000'
-  },
-  common: {
-    primaryColor: 'rgb(7, 25, 82)',
-    primaryColorHover: 'rgb(8, 131, 149)',
-    primaryColorPressed: 'rgb(55, 183, 195)',
-    primaryColorSuppl: 'rgb(235, 244, 246)',
-    actionColor: 'rgb(8, 131, 149)'
-  },
-  Card: {
-    colorEmbedded: 'rgba(235, 244, 246, 0.53)'
-  }
+  //   Menu: {
+  //     color: '#00000000'
+  //   },
+  //   common: {
+  //     primaryColor: 'rgb(7, 25, 82)',
+  //     primaryColorHover: 'rgb(8, 131, 149)',
+  //     primaryColorPressed: 'rgb(55, 183, 195)',
+  //     primaryColorSuppl: 'rgb(235, 244, 246)',
+  //     actionColor: 'rgb(8, 131, 149)'
+  //   },
+  //   Card: {
+  //     colorEmbedded: 'rgba(235, 244, 246, 0.53)'
+  //   }
 }
 
 const themeEditorStyle = localStorage.getItem('theme') === 'true' ? {} : { display: 'none' }

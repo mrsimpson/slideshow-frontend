@@ -30,6 +30,7 @@ coverage
 *.tsbuildinfo
 
 test-results/
+playwright
 playwright-report/
 
 # the env file – use .env.local

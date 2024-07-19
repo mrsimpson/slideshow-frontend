@@ -1,28 +1,26 @@
 <template>
-  <n-space vertical>
-    <n-card v-if="presentation" :bordered="false">
-      <n-card bordered embedded size="large">
-        <PresentationFactsheet
-          :presentation="presentation"
-          :show-embedding="false"
-          :show-open="false"
-        />
-      </n-card>
-      <BroadcastForm :presentation="presentation" />
-      <PresentationEventsTimeline
-        :events="myPresentationEvents"
-        :my-anon-uuid="anonUuid"
-        :my-user-id="session?.user.id"
+  <n-flex v-if="presentation" :style="{ maxHeight: totalHeight }" vertical>
+    <NCard bordered embedded size="large">
+      <PresentationFactsheet
+        :presentation="presentation"
+        :show-embedding="false"
+        :show-open="false"
       />
-    </n-card>
-  </n-space>
+    </NCard>
+    <BroadcastForm :presentation="presentation" />
+    <PresentationEventsTimeline
+      :events="myPresentationEvents"
+      :my-anon-uuid="anonUuid"
+      :my-user-id="session?.user.id"
+    />
+  </n-flex>
 </template>
 
 <script lang="ts" setup>
 import PresentationFactsheet from '@/components/PresentationFactsheet.vue'
 import { usePresenterStore } from '@/stores/presenter'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useUserSessionStore } from '@/stores/userSession'
 import PresentationEventsTimeline from '@/components/PresentationEventsTimeline.vue'
 import { useRouter } from 'vue-router'
@@ -43,6 +41,8 @@ const presentationId = () => parseInt(<string>currentRoute.value.params.presenta
 const isPresentationCurrentOne = () => {
   return currentPresentation.value?.id && presentationId() === currentPresentation?.value.id
 }
+
+const totalHeight = computed(() => `${window.innerHeight - 200}px`)
 
 let presentation = ref<Presentation | null>()
 
