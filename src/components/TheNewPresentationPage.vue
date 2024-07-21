@@ -2,7 +2,11 @@
   <n-card :bordered="false" :title="t('create_new_presentation')">
     <n-form ref="formRef" :model="formValue" :rules="rules" @submit.prevent="handleSubmit">
       <n-form-item :label="t('presentation_title')" path="title">
-        <n-input v-model:value="formValue.title" :placeholder="t('presentation_title_label')" />
+        <n-input
+          v-model:value="formValue.title"
+          :autofocus="true"
+          :placeholder="t('presentation_title_label')"
+        />
       </n-form-item>
       <n-form-item :label="t('presentation_description_label')" path="description">
         <n-input
@@ -24,7 +28,6 @@
 <script lang="ts" setup>
 import { usePresenterStore } from '@/stores/presenter'
 import { useI18n } from 'vue-i18n'
-import { useUserSessionStore } from '@/stores/userSession'
 import { ref } from 'vue'
 import { type FormInst, useMessage } from 'naive-ui'
 import type { CreatePresentation } from '@/api/types/entities'
@@ -35,7 +38,6 @@ const { createPresentation, setActivePresentation } = usePresenterStore()
 const { t } = useI18n()
 const router = useRouter()
 
-const { session } = useUserSessionStore()
 const formRef = ref<FormInst | null>(null)
 const message = useMessage()
 const formValue = ref({

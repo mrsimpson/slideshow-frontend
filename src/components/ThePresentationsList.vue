@@ -5,11 +5,7 @@
         <PresentationFactsheet :presentation="currentPresentation" :show-start-stop="false" />
       </n-card>
     </n-card>
-    <n-card
-      v-if="nonCurrentPresentations?.length"
-      :bordered="false"
-      :title="t('other_presentations')"
-    >
+    <n-card :bordered="false" :title="t('other_presentations')">
       <template #header-extra>
         <n-button type="default" @click.prevent="() => router.push('/presentations/new')">
           <template #icon>
