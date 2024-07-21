@@ -7,6 +7,7 @@ export class ProfilePage extends BasePage {
   readonly website: Locator
   readonly updateButton: Locator
   readonly signOutButton: Locator
+  readonly signInEmail: Locator
 
   constructor(page: Page) {
     super(page)
@@ -15,6 +16,7 @@ export class ProfilePage extends BasePage {
     this.website = page.getByTestId('input-account-website').getByRole('textbox')
     this.updateButton = page.getByTestId('button-account-updateProfile')
     this.signOutButton = page.getByTestId('button-account-signOut')
+    this.signInEmail = page.getByTestId('input-signin-email').getByRole('textbox')
   }
 
   public async goto(): Promise<void> {
