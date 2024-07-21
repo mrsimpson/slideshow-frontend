@@ -7,7 +7,11 @@
     </n-card>
     <n-card :bordered="false" :title="t('other_presentations')">
       <template #header-extra>
-        <n-button type="default" @click.prevent="() => router.push('/presentations/new')">
+        <n-button
+          data-testid="button-new-presentation"
+          type="default"
+          @click.prevent="() => router.push('/presentations/new')"
+        >
           <template #icon>
             <PresentationFile />
           </template>

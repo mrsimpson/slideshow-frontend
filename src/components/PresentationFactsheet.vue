@@ -1,12 +1,13 @@
 <template>
-  <NThing
+  <n-thing
     :id="'presentation-' + presentation.id"
     :description="presentation.description || ''"
     :title="presentation?.title || 'untitled presentation'"
+    data-testid="thing-presentation-factsheet"
   >
     <template #default>
-      <NSpace vertical>
-        <NModal
+      <n-space vertical>
+        <n-modal
           :show="showQrCode"
           :style="{ width: '600px' }"
           preset="card"
@@ -14,7 +15,7 @@
         >
           <template #header>QR Code to join "{{ presentation.title }}"</template>
           <template #default>
-            <NQrCode
+            <n-qr-code
               :size="500"
               :style="{ cursor: 'zoom-in', padding: 0 }"
               :value="getParticipationUrl()"
@@ -27,11 +28,11 @@
             </div>
           </template>
           <template #footer>
-            <NButton :style="{ width: '100%' }" @click="handleDownloadQRCode()">Download</NButton>
+            <n-button :style="{ width: '100%' }" @click="handleDownloadQRCode()">Download</n-button>
           </template>
-        </NModal>
+        </n-modal>
 
-        <NModal
+        <n-modal
           :show="showEmbeddingCode"
           :style="{ width: '600px' }"
           preset="card"
@@ -52,68 +53,67 @@
               }}
             </pre>
           </template>
-        </NModal>
-      </NSpace>
+        </n-modal>
+      </n-space>
     </template>
     <template #action>
-      <NFlex justify="space-between">
-        <NButtonGroup>
-          <NButton v-if="showOpen" round @click="handlePresentationOpen()">
+      <n-flex justify="space-between">
+        <n-button-group>
+          <n-button v-if="showOpen" round @click="handlePresentationOpen()">
             {{ t('open_button') }}
-          </NButton>
-          <NButton
+          </n-button>
+          <n-button
             v-if="showStartStop"
             :disabled="presentation.lc_status === 'started'"
             round
             @click="handleClickStart()"
           >
             <template #icon>
-              <NIcon>
+              <n-icon>
                 <Play />
-              </NIcon>
+              </n-icon>
             </template>
             {{ presentation.lc_status === 'started' ? t('started_button') : t('start_button') }}
-          </NButton>
-          <NButton
+          </n-button>
+          <n-button
             v-if="showStartStop"
             :disabled="presentation.lc_status !== 'started'"
             round
             @click="handleClickStop()"
           >
             <template #icon>
-              <NIcon>
+              <n-icon>
                 <Stop />
-              </NIcon>
+              </n-icon>
             </template>
             {{ t('stop_button') }}
-          </NButton>
-        </NButtonGroup>
-        <NButtonGroup>
-          <NButton round @click="toggleQrCodeShown()">
+          </n-button>
+        </n-button-group>
+        <n-button-group>
+          <n-button round @click="toggleQrCodeShown()">
             <template #icon>
-              <NIcon>
+              <n-icon>
                 <QrCode />
-              </NIcon>
+              </n-icon>
             </template>
             QR-Code
-          </NButton>
-          <NButton v-if="showEmbedding" round @click="toggleEmebddingCodeShown()">
+          </n-button>
+          <n-button v-if="showEmbedding" round @click="toggleEmebddingCodeShown()">
             <template #icon>
-              <NIcon>
+              <n-icon>
                 <Code />
-              </NIcon>
+              </n-icon>
             </template>
             sli.dev Code
-          </NButton>
-        </NButtonGroup>
-      </NFlex>
+          </n-button>
+        </n-button-group>
+      </n-flex>
     </template>
-  </NThing>
+  </n-thing>
 </template>
 
 <script lang="ts" setup>
 import { defineProps, ref } from 'vue'
-import { NButton, NButtonGroup, NFlex, NIcon, NModal, NQrCode, NSpace, NThing } from 'naive-ui'
 import slug from '@/lib/slug'
 import type { Presentation } from 'src/api/types/entities'
 import { usePresenterStore } from '@/stores/presenter'

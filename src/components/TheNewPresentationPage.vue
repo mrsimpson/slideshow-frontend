@@ -6,6 +6,7 @@
           v-model:value="formValue.title"
           :autofocus="true"
           :placeholder="t('presentation_title_label')"
+          data-testid="input-presentation-title"
         />
       </n-form-item>
       <n-form-item :label="t('presentation_description_label')" path="description">
@@ -13,11 +14,15 @@
           v-model:value="formValue.description"
           :autosize="{ minRows: 5 }"
           :placeholder="t('presentation_description_placeholder')"
+          data-testid="input-presentation-description"
           type="textarea"
         />
       </n-form-item>
       <n-form-item>
-        <n-button :disabled="!formValue.title" @click.prevent="handleSubmit"
+        <n-button
+          :disabled="!formValue.title"
+          data-testid="button-create-presentation"
+          @click.prevent="handleSubmit"
           >{{ t('Create') }}
         </n-button>
       </n-form-item>
