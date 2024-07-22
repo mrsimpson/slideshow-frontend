@@ -82,13 +82,15 @@ export const usePresenterStore = defineStore('presenterStore', {
       const acknowledgment = await backend.stopPresentation(presentationId)
       return handleAcknowledgement(acknowledgment, presentationId)
     },
+    async deletePresentation(presentationId: Presentation['id']) {
+      return backend.deletePresentation(presentationId)
+    },
     async broadcast(presentationId: Presentation['id'], message: string) {
       await backend.createBroadcastMessage(presentationId, message)
     },
     async createPresentation(presentation: CreatePresentation): Promise<Presentation | null> {
-      const newPresentation = await backend.createPresentation(presentation)
+      return backend.createPresentation(presentation)
       // we don't need to handle anything as we've subscribed to the presentation change notifications
-      return newPresentation
     },
     async syncMyPresentations() {
       const { session } = useUserSessionStore()

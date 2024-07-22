@@ -1,5 +1,8 @@
 <template>
-  <div :style="{ flexDirection: isMine ? 'row-reverse' : 'row' }" class="event-wrapper">
+  <div
+    :class="`event-wrapper ${eventType}`"
+    :style="{ flexDirection: isMine ? 'row-reverse' : 'row' }"
+  >
     <n-icon class="type-icon" size="1.5rem">
       <slot name="icon" />
     </n-icon>
@@ -10,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps<{ isMine: boolean }>()
+const props = defineProps<{ isMine: boolean; eventType: string }>()
 </script>
 
 <style lang="css" scoped>

@@ -20,6 +20,8 @@
   "other_presentations": "Other presentations",
   "please_enter_presentation_title": "You have to provide a title for your presentation",
   "please_enter_username_message": "Please enter a username",
+  "presentation_delete_error_message": "Presentation could not be deleted",
+  "presentation_delete_success_message": "Presentation deleted",
   "presentation_description_label": "Description",
   "presentation_description_placeholder": "Give your audience a brief overview of what the presentation is about. \nYou don't have to do this, but think about yourself:: Wouldn't you want to know whether a presentation is interesting prior to joining it?",
   "presentation_title": "Title",

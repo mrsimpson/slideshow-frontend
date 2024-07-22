@@ -5,7 +5,10 @@
         <PresentationFactsheet :presentation="currentPresentation" :show-start-stop="false" />
       </n-card>
     </n-card>
-    <n-card :bordered="false" :title="t('other_presentations')">
+    <n-card
+      :bordered="false"
+      :title="nonCurrentPresentations.length > 0 ? t('other_presentations') : ' '"
+    >
       <template #header-extra>
         <n-button
           data-testid="button-new-presentation"

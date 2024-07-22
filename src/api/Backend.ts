@@ -33,6 +33,8 @@ export interface Backend {
 
   stopPresentation(presentationId: Presentation['id']): Promise<Acknowledgement>
 
+  deletePresentation(presentationId: Presentation['id']): Promise<boolean>
+
   notifyAudience(presentationId: Presentation['id'], event: PresentationEvent): Promise<void>
 
   listenToPresentationEvents(

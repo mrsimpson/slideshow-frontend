@@ -1,6 +1,6 @@
 <template>
   <n-divider />
-  <div ref="listContainer" class="list-container">
+  <div ref="listContainer" class="list-container" data-testid="container-event-list">
     <div
       v-for="event in sortedEvents"
       :key="event.id"

@@ -1,5 +1,5 @@
 <template>
-  <EventWithIconWrapper :is-mine="isMine">
+  <EventWithIconWrapper :event-type="event.type" :is-mine="isMine">
     <template #icon>
       <PresentationIcon />
     </template>

@@ -56,15 +56,36 @@
         </n-modal>
       </n-space>
     </template>
+    <template #header-extra>
+      <n-button
+        :bordered="false"
+        data-testid="button-delete-presentation"
+        @click.prevent="handleDelete"
+      >
+        <!-- we just want this button for being able to teardown in tests.
+        Visibility hidden is not accessible to playwright though, so just create an empty button.
+        It could look like the following -->
+        <!--        {{ $t('Delete') }}-->
+        <!--        <template #icon>-->
+        <!--          <TrashCan />-->
+        <!--        </template>-->
+      </n-button>
+    </template>
     <template #action>
       <n-flex justify="space-between">
         <n-button-group>
-          <n-button v-if="showOpen" round @click="handlePresentationOpen()">
+          <n-button
+            v-if="showOpen"
+            data-testid="button-open-presentation"
+            round
+            @click="handlePresentationOpen()"
+          >
             {{ t('open_button') }}
           </n-button>
           <n-button
             v-if="showStartStop"
             :disabled="presentation.lc_status === 'started'"
+            data-testid="button-start-presentation"
             round
             @click="handleClickStart()"
           >
@@ -78,6 +99,7 @@
           <n-button
             v-if="showStartStop"
             :disabled="presentation.lc_status !== 'started'"
+            data-testid="button-stop-presentation"
             round
             @click="handleClickStop()"
           >
@@ -89,8 +111,9 @@
             {{ t('stop_button') }}
           </n-button>
         </n-button-group>
+
         <n-button-group>
-          <n-button round @click="toggleQrCodeShown()">
+          <n-button data-testid="button-qrcode" round @click="toggleQrCodeShown()">
             <template #icon>
               <n-icon>
                 <QrCode />
@@ -98,7 +121,12 @@
             </template>
             QR-Code
           </n-button>
-          <n-button v-if="showEmbedding" round @click="toggleEmebddingCodeShown()">
+          <n-button
+            v-if="showEmbedding"
+            data-testid="button-embed"
+            round
+            @click="toggleEmebddingCodeShown()"
+          >
             <template #icon>
               <n-icon>
                 <Code />
@@ -120,9 +148,11 @@ import { usePresenterStore } from '@/stores/presenter'
 import { Code, Play, QrCode, Stop } from '@vicons/carbon'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useMessage } from 'naive-ui'
 
 const showQrCode = ref(false)
 const showEmbeddingCode = ref(false)
+const { startPresentation, stopPresentation, deletePresentation } = usePresenterStore()
 
 const props = defineProps({
   presentation: {
@@ -147,6 +177,7 @@ const emit = defineEmits(['started'])
 
 const router = useRouter()
 const { t } = useI18n()
+const message = useMessage()
 
 const toggleQrCodeShown = () => {
   showQrCode.value = !showQrCode.value
@@ -175,12 +206,22 @@ const handleDownloadQRCode = () => {
   }
 }
 
+const handleDelete = async () => {
+  const deleted = await deletePresentation(props.presentation.id)
+  if (deleted) {
+    message.success(t('presentation_delete_success_message'))
+    await router.push('/presentations')
+  } else {
+    message.error(t('presentation_delete_error_message'))
+  }
+}
+
 const handleClickStart = async () => {
-  await usePresenterStore().startPresentation(props.presentation.id)
+  await startPresentation(props.presentation.id)
 }
 
 const handleClickStop = async () => {
-  await usePresenterStore().stopPresentation(props.presentation.id)
+  await stopPresentation(props.presentation.id)
 }
 
 function handlePresentationOpen() {

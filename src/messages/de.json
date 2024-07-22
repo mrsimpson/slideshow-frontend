@@ -20,6 +20,8 @@
   "other_presentations": "Andere Präsentationen",
   "please_enter_presentation_title": "Bitte gib einen Titel für Deine Präsentation an",
   "please_enter_username_message": "Bitte gib einen Benutzernamen ein",
+  "presentation_delete_error_message": "Präsentation konnte nicht gelöscht werden",
+  "presentation_delete_success_message": "Präsentation gelöscht",
   "presentation_description_label": "Beschreibung",
   "presentation_description_placeholder": "Gib Deinem Publikum einen kurzen Überblick, worum es in der Präsentation geht. \nDu musst das nicht tun, aber bevor Du in einer Präsentation sitzt, willst Du doch auch wissen, ob es Dich überhaupt interessiert.",
   "presentation_title": "Titel",

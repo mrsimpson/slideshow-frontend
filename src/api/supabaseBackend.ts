@@ -219,6 +219,11 @@ class SupabaseBackend implements Backend {
     await this.sendRealtimeEvent(presentationId, event)
   }
 
+  async deletePresentation(presentationId: Presentation['id']): Promise<boolean> {
+    const { error } = await this.client.from('presentations').delete().eq('id', presentationId)
+    return !error
+  }
+
   private getRealtimeChannelName(presentationId: Presentation['id']) {
     return `presentation-${presentationId}`
   }

@@ -1,10 +1,14 @@
 <template>
-  <n-form ref="formRef" :model="formValue" inline @submit="sendBroadcast">
+  <n-form ref="formRef" :model="formValue" inline @submit.prevent="sendBroadcast">
     <n-form-item class="form-input" path="message">
-      <n-input v-model:value="formValue.message" :placeholder="t('broadcast_placeholder')" />
+      <n-input
+        v-model:value="formValue.message"
+        :placeholder="t('broadcast_placeholder')"
+        data-testid="input-send-broadcast"
+      />
     </n-form-item>
     <n-form-item class="form-button">
-      <n-button @click="sendBroadcast">
+      <n-button data-testid="button-send-broadcast" @click.prevent="sendBroadcast">
         <template #icon>
           <n-icon>
             <Send />
